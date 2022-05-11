@@ -26,7 +26,7 @@ The training and testing processes are mentioned on parent README file.
 ## Export Model
 Execute below command to export model using TorchScript-
 ```
-$ python src/export_model.py --config-file diplastmodel/uos_dip_config.yaml \
+$ python src/export_model.py --config-file diplastmodel/faster_rcnn_R_101_FPN_3x_config.yaml \
     --output output --export-method scripting --format torchscript \
     MODEL.WEIGHTS diplastmodel/model_final.pth \
     MODEL.DEVICE cuda
