@@ -136,12 +136,12 @@ def main():
     #v = Visualizer(im[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TEST[0]))
     v = Visualizer(im[:, :, ::-1], metadata=mde_test_metadata, scale=5)
     v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    
-    imgfilename = os.path.splitext(os.path.basename(img_path))[0]
-    pred_imgfile = str('inferimg/' + imgfilename+'.jpg')
-   
-    cv2.imwrite(pred_imgfile, v.get_image()[:, :, ::-1])
-    
+    pred_imgfile = 'inferimg/114_0.jpg')
+    #cv2.imwrite(pred_imgfile, v.get_image()[:, :, ::-1])
+    #plt.imsave(pred_imgfile, v.get_image()[:, :, ::-1]/255.0)
+    #v.save(pred_imgfile)
+    # Show predicted image
+    plt.imshow(v.get_image()[:, :, ::-1])
     print("Inference completed !", flush=True)
     
                             
