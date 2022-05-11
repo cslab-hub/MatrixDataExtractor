@@ -9,7 +9,7 @@ First you need to get Table Detection model weight from '/tabledetection/diplast
 'tabledetection' is a document table detection framework based on PyTorch and Detectron2 libraries which helps to identify document tables (rectangular boundary box) on PDF documents. It follows Faster R-CNN Object Detection algorithm and uses transfer learning method by incorporating TableBank pre-trained model. The pre-trained model can be downloaded from Layout-Parser (https://github.com/Layout-Parser/layout-parser). 
 
 ## backend - Web Application
-'backend' is a Django based web application which gives a basic user interface to plastic experts to store their PDF files on disk and allows to extract table data by applying Deep Learning and OCR (Optical Character Recognition). It also provide services to store table data in MongoDB and can also provide search functionality of those data using Keywords.
+'backend' is a Django based web application which gives a basic user interface to plastic experts to store their PDF files on disk and allows to extract table data by applying Deep Learning and OCR (Optical Character Recognition). It also provide services to store table data in MongoDB and can also provide search functionality of those data using Keywords. Web application specific config file is provided as '/backend/util/prop/MDE.xml'.
 
 **NOTE:** Secret Key for Django web application is not provided here, which should be inserted at mde.env file. 
 
