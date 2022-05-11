@@ -91,7 +91,7 @@ def main():
     UOS_MODEL_USE = 1
 
     if UOS_MODEL_USE == 1:
-        UOS_MODEL = 'diplastmodel/uos_dip_config.yaml'
+        UOS_MODEL = 'diplastmodel/faster_rcnn_R_101_FPN_3x_config.yaml'
         UOS_WEIGHT_PATH = 'diplastmodel/model_final.pth'
         
     elif UOS_MODEL_USE == 2:
