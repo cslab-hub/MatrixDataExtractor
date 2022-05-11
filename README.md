@@ -90,4 +90,4 @@ Run web application on Linux OS by executing start.sh shell script as-
 ```
 $ bash -i start.sh 
 ```
-Matrix Data Extractor tool is funded by the Interreg North-West Europe program (Interreg NWE), project Di-Plast - Digital Circular Economy for the Plastics Industry (NWE729).
+**Disclaimer:** Matrix Data Extractor tool is funded by the Interreg North-West Europe program (Interreg NWE), project Di-Plast - Digital Circular Economy for the Plastics Industry (NWE729). Any further support after end of this project will not be provided unfortunately.
