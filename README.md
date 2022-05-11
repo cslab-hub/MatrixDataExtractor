@@ -27,7 +27,7 @@ $ conda deactivate env_mde
 ```
 
 You can follow below link for reference-
-https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf 
+- https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf 
 
 To install basic dependencies execute below commands (other versions can work but are not guaranteed to do so)-
 ```
