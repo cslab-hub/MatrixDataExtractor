@@ -1,0 +1,602 @@
+RecursiveScriptModule(
+  original_name=ScriptableAdapter
+  (model): RecursiveScriptModule(
+    original_name=GeneralizedRCNN
+    (backbone): RecursiveScriptModule(
+      original_name=FPN
+      (top_block): RecursiveScriptModule(original_name=LastLevelMaxPool)
+      (bottom_up): RecursiveScriptModule(
+        original_name=ResNet
+        (stem): RecursiveScriptModule(
+          original_name=BasicStem
+          (conv1): RecursiveScriptModule(
+            original_name=Conv2d
+            (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+          )
+        )
+        (stages): RecursiveScriptModule(
+          original_name=ModuleList
+          (0): RecursiveScriptModule(
+            original_name=Sequential
+            (0): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (shortcut): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (1): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (2): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+          )
+          (1): RecursiveScriptModule(
+            original_name=Sequential
+            (0): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (shortcut): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (1): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (2): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (3): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+          )
+          (2): RecursiveScriptModule(
+            original_name=Sequential
+            (0): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (shortcut): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (1): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (2): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (3): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (4): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (5): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (6): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (7): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (8): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (9): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (10): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (11): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (12): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (13): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (14): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (15): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (16): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (17): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (18): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (19): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (20): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (21): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (22): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+          )
+          (3): RecursiveScriptModule(
+            original_name=Sequential
+            (0): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (shortcut): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (1): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+            (2): RecursiveScriptModule(
+              original_name=BottleneckBlock
+              (conv1): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv2): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+              (conv3): RecursiveScriptModule(
+                original_name=Conv2d
+                (norm): RecursiveScriptModule(original_name=FrozenBatchNorm2d)
+              )
+            )
+          )
+        )
+      )
+      (lateral_convs): RecursiveScriptModule(
+        original_name=ModuleList
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=Conv2d)
+        (2): RecursiveScriptModule(original_name=Conv2d)
+        (3): RecursiveScriptModule(original_name=Conv2d)
+      )
+      (output_convs): RecursiveScriptModule(
+        original_name=ModuleList
+        (0): RecursiveScriptModule(original_name=Conv2d)
+        (1): RecursiveScriptModule(original_name=Conv2d)
+        (2): RecursiveScriptModule(original_name=Conv2d)
+        (3): RecursiveScriptModule(original_name=Conv2d)
+      )
+    )
+    (proposal_generator): RecursiveScriptModule(
+      original_name=RPN
+      (rpn_head): RecursiveScriptModule(
+        original_name=StandardRPNHead
+        (conv): RecursiveScriptModule(
+          original_name=Conv2d
+          (activation): RecursiveScriptModule(original_name=ReLU)
+        )
+        (objectness_logits): RecursiveScriptModule(original_name=Conv2d)
+        (anchor_deltas): RecursiveScriptModule(original_name=Conv2d)
+      )
+      (anchor_generator): RecursiveScriptModule(
+        original_name=DefaultAnchorGenerator
+        (cell_anchors): RecursiveScriptModule(original_name=BufferList)
+      )
+    )
+    (roi_heads): RecursiveScriptModule(
+      original_name=StandardROIHeads
+      (box_pooler): RecursiveScriptModule(
+        original_name=ROIPooler
+        (level_poolers): RecursiveScriptModule(
+          original_name=ModuleList
+          (0): RecursiveScriptModule(original_name=ROIAlign)
+          (1): RecursiveScriptModule(original_name=ROIAlign)
+          (2): RecursiveScriptModule(original_name=ROIAlign)
+          (3): RecursiveScriptModule(original_name=ROIAlign)
+        )
+      )
+      (box_head): RecursiveScriptModule(
+        original_name=FastRCNNConvFCHead
+        (flatten): RecursiveScriptModule(original_name=Flatten)
+        (fc1): RecursiveScriptModule(original_name=Linear)
+        (fc_relu1): RecursiveScriptModule(original_name=ReLU)
+        (fc2): RecursiveScriptModule(original_name=Linear)
+        (fc_relu2): RecursiveScriptModule(original_name=ReLU)
+      )
+      (box_predictor): RecursiveScriptModule(
+        original_name=FastRCNNOutputLayers
+        (cls_score): RecursiveScriptModule(original_name=Linear)
+        (bbox_pred): RecursiveScriptModule(original_name=Linear)
+      )
+    )
+  )
+)

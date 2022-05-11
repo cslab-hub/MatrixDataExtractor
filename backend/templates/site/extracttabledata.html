@@ -1,0 +1,148 @@
+{% extends "site/index.html" %}
+
+{% block title %}Extract Table Data{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+<style type="text/css">
+
+    .extract-tab-data-info{
+        position: absolute;
+        background-color: #98c222;
+        top: 1em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 30em;
+        width: 78em;
+    }
+    .tab-data-extract{
+        position: absolute;
+        background-color: #98c222;
+        top: 33em;
+        left: 30em;
+        height: 15em;
+        width: 78em;
+        padding: 1em 1em;
+    }
+    .table_img_list{
+        font-size:  medium;
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+{% endblock %}
+
+
+
+{% block content %}
+<script>
+    // THIS JAVASCRIPT FUNCTION IS DIFFERENT THAN OTHER FUNCTIONS TO EXTRACT MANUFACTURER NAMES AND CORRESPONDING TDS_LIST
+    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_cascading_dropdown
+
+        const tds_new_dict ={{tds_new_dict|safe}};
+    
+        window.onload = function() {
+        let manufacturerSel = document.getElementById("manufacturer");
+        let tdslistSel = document.getElementById("tdslist");
+        
+        for (let x in tds_new_dict) {
+            manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+        }
+        
+        manufacturerSel.onchange = function() {    
+            //empty Chapters dropdown
+            tdslistSel.length = 1;
+            //display correct values
+            //var z = tds_list[this.value];
+            let final_tds_list = tds_new_dict[this.value];
+            //console.log(z);
+            for (var i = 0; i < final_tds_list.length; i++) {
+                tdslistSel.options[tdslistSel.options.length] = new Option(final_tds_list[i].replace(/['"]+/g, ''), final_tds_list[i]);
+            }
+        }
+        
+    }
+
+
+</script>
+
+
+<div class="extract-tab-data-structure"></div>  
+    <div class="extract-tab-data-info">
+        <h3>
+            How Table Data Extraction Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em">
+           <ul>
+               <li>
+                <b>Make sure you have extracted table images using Table Region Identification link.</b> If you have already extracted table images, then you can 
+                see those Manufacturer names and corresponding  Technical Datasheets in dropdown menu. 
+                It is not storing all Manufacturer names and corresponding Technical Datasheets that you have inserted within <b>srcpdf</b> folder.
+               </li>
+               <br>
+               <li>
+                Select Manufacturer and corresponding Technical Datasheets from dropdown lists.
+                </li>
+                <br>
+                <li>
+                        Click on <b>Extract Table Info</b> button.
+                </li>
+                <br>
+                <li>
+                        Go to <b>util -> data -> tabledet -> inference -> infertableimg</b> folder. Go to Manufacturer sub-folder (e.g. <b>LyondellBasell</b>)
+                        and also Technical Datasheet sub-folder (e.g. <b>Circulen 2420D Plus</b>). You can see Technical Datasheet sub-folder 
+                        (e.g. <b> Circulen 2420D Plus</b>) contains images along with extracted table data in text file format.
+                </li>
+                <br>
+                <li>
+                    In Table Region Identification link, you have extracted only table images within Technical Datasheet sub-folder. Now you have extracted
+                    table data in the same folder where table images are extracted to keep simple data management process. Optical Character Recognition 
+                    (<b>OCR</b>) based techniques is used to extract table data from those table images.
+                    <br>
+                    <b>Note : </b> Proper table structure (in proper row and column format) is not maintained to store table data into text files.
+
+                </li>
+
+           </ul>
+        </p>
+    </div>
+    
+    <form method="post" name="extracttabledata" action="/extracttabledata/"> 
+            {% csrf_token %}
+
+            <div class="tab-data-extract">
+                
+                <label><b> Manufacturer  </b></label>
+                <select name="manufacturer" id="manufacturer" style="margin-left:4.2em; margin-right:1em">
+                        <option value="" selected="selected">Select Manufacturer</option>
+                </select>
+                <br><br>
+                <label><b> Technical Datasheet </b></label>
+                <select name="tdslist" id="tdslist" style="margin-left:1em; margin-right:1em">
+                        <option value="" selected="selected">Please select Manufacturer first</option>
+                </select>
+                <button type="submit" class="btn btn-primary" name="gettableimage" value="gettableimage" onload = "getTableImgList()">Extract Table Info</button>
+                <br>
+                <div class="table_img_list">
+                    <p >
+                         <!-- https://jinja.palletsprojects.com/en/3.0.x/templates/-->
+                        {% if table_img_set|length > 0 %}
+                        <ol>
+                            {% for table_img in table_img_set %}
+                                <li>{{ table_img }}</li>
+                            {% endfor %}    
+                        </ol>
+                        {% elif table_img_set|length < 0 %}
+                            {{"Table is not inferred. Please infer table region before Tabular Data Extraction."}}
+
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+    
+    </form>
+</div>
+{% endblock %}
+

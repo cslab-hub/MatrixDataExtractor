@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style type="text/css">
+    .sidenav-left {
+        height: 80em;
+        width: 25em;
+        font-size: medium;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color:#98c222;
+        overflow-x: hidden;
+        padding-top: 1em;
+    }
+
+    .sidenav-right {
+        height: 80em;
+        width: 20em;
+        font-size: medium;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        background-color:#98c222;
+        overflow-x: hidden;
+        padding-top: 1em;
+    }
+
+    .sidenav-left a{
+        padding: 0.3em 0.3em 0.3em 0.3em;
+        text-decoration: none;
+        font-size: 1.7rem;
+        color: #003399;
+        display: block;
+    }
+
+    .sidenav-left a:hover{
+        color: #f1f1f1;
+    }
+
+    img {
+        height:100%;width:100%;margin-top:0.05em;
+        background-color:#FFFFFF;
+    }
+
+    .main{
+        margin-left: 30em;
+        padding: 0em 10em;
+
+    }
+
+    .table {
+            border-collapse: collapse;
+            border: 2em black solid;
+            font: sans-serif;
+        }
+
+    .td {
+            border: 1em black solid;
+            padding: 5em;
+        }
+    .contact-info{
+        padding-top: 1em;
+        padding-left: 1em;
+    }
+
+    .user-info{
+        padding-top: 3em;
+        padding-left: 1em;
+    }
+    .disclaimer-info{
+        padding-top: 4em;
+        padding-left: 1em;
+    }
+</style>
+<title>{% block title %}{% endblock %}</title>
+{% endblock %}
+</head>
+
+<body>
+<div class="wrapper" id="base-structure">
+
+    <div class="sidenav-left">
+        <a class="logo"><img src="https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2020/03/13/Pictures/_6e21fd06-64da-11ea-9f9f-cfbcf00f9318.jpg" width="600" height="400" alt="Olive Ridley turtle Logo"></a>
+        <a href="/">Home</a>
+        <a href="/syncdata">Synchronize Datasheet</a>
+        <a href="/textextraction">Datasheet Information Extraction</a>
+        <a href="/tableextraction">Table Region Identification</a>
+        <a href="/extracttabledata">Table Data Extraction</a>
+        <a href="/transfertabledata">Transfer Data to Database</a>
+        <a href="/tableinfosearch">Search Table Information from Database</a>
+        
+    </div>
+
+    <div class="sidenav-right">
+        <div class="contact-info">
+            <h4> <b>Contact:</b> </h4>
+            <p> For more technical details please do not contact <a href="https://github.com/agcdke" target="_blank"> My GitHub Profile </a></p>
+        </div>
+        <div class="user-info">
+            <h4> <b>User Information:</b> </h4>
+            <p> <b>Normal User</b> - Needs skill sets to browse web application and ability to handle basic file system. 
+                A training material will be available to install the necessary packges for the web application on your local machine. 
+                If you will get any error messages, please contact your System Administrator or Advanced User.
+            </p>
+            <br>
+            <p> <b>Advanced User</b> - Needs minimum skill sets like Normal User, also needs understanding of basic Computer Vision algorithms,
+                Python programming skill, and ability to handle MongoDB database. 
+                A brief training material will be available for Advanced User. 
+            </p>
+
+        </div>
+        <div class="disclaimer-info">
+            <h4> <b>Disclaimer:</b> </h4>
+            <p> 
+                The application is developed on specific versions of software packges. I am not responsible to maintain code repository anymore. 
+            </p>
+        </div>
+    </div>
+    
+    <div class="main" id="base-content" name="base-content">
+        {% block content %}{% endblock %}
+    </div>  
+
+
+   
+
+</div>
+</body>
+</html>

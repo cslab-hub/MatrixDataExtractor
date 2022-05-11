@@ -1,0 +1,92 @@
+{% extends "site/base.html" %}
+{% block title %}Matrix Data Extractor{% endblock %}
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+       
+       label{
+        padding-right: 1em;
+       }
+       
+        .tab-reg-extract-info{
+            position: absolute;
+            background-color: #98c222;
+            top: 1em;
+            left: 30em;
+            padding: 1em 1em;
+            height: 30em;
+            width: 78em;
+        }
+
+        .show-sync-tds{
+            position: absolute;
+            background-color: #98c222;
+            top: 35em;
+            left: 30em;
+            padding: 1em 1em;
+            height: 5em;
+            width: 78em;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="index-structure">
+
+    <div class="tab-reg-extract-structure"></div>  
+    <div class="tab-reg-extract-info">
+        <h3>
+            How Synchronize Datasheet Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em"> 
+            <ul>
+                <li>
+                    <b>Caution: Shorten the technical datasheet PDF name if they are large. Very large filename is not recommended during dropdown selection.</b>
+                </li>
+                <br>
+                <li>
+                    You need permission to access <b>util</b> project folder.  Access <b>util -> data -> srcpdf</b> folder.
+                </li>
+                <br>
+                <li>
+                    First you need to create sub-folders with Manufacturer name. Afterthat you can insert your Technical Datasheets inside the corresponding 
+                    Manufacturer sub-folder, e.g., create sub-folder <b>BASF</b> inside <b>srcpdf</b> folder and then insert the technical datasheets of BASF within 
+                    <b>BASF</b> sub-folder. 
+                    <br><br>
+                    <b>Caution: </b> Inserting datasheets directly within <b>srcpdf</b> folder is not advisable. First create manufacturer sub-folder within 
+                    <b>srcpdf</b> folder before inserting datasheets.
+                </li>
+                <br>
+                <li>
+                    Now click on <b>Synchronize Datasheets</b> button. You can now see manufacturer names and corresponding technical datasheets in <b>MongoDB</b>
+                    database table, as well as, at <b>Datasheet Information Extraction</b> link and <b>Table Region Identification</b> link.
+                </li>
+                <br>
+                <li>
+                    If you want to delete some technical datasheets from any manufacturer sub-folder or if you want to delete the entire manufacturer sub-folder 
+                    inside <b>srcpdf</b> folder, then again click on <b>Synchronize Datasheets</b> button to update your dataset. Otherwise you are not able to
+                    synchronize your latest dataset for further operations.
+                </li>
+            
+            </ul>
+        </p>
+</div>
+
+    <div class="show-sync-tds">  
+        <form method="post" action=""> 
+            {% csrf_token %}
+            <div class="sync-tds">
+                <label  style="margin-left:0em; margin-right:1em"> <b> Synchronize your dataset after inserting your technical datasheets</b> </label>
+                <button type="submit" class="btn btn-primary" name="showtds" value="showtds">Synchronize Datasheets</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

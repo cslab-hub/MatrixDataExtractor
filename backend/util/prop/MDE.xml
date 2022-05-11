@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<matrixinformationextractor>
+    <dataset category='dataset'>
+        <tabledetection category='table detection'>
+            <sourcepdf>/util/data/srcpdf</sourcepdf>
+            <temptextimage>/util/data/tempimg/textdata</temptextimage>
+            <temptableimage>/util/data/tempimg/tabledata</temptableimage>
+            <imgtotext>/util/data/extractedinfo/textualdata</imgtotext>
+            <tabulardata>/util/data/extractedinfo/tabulardata</tabulardata>
+            <modelweight>/util/data/tabledet/modelweight</modelweight>
+            <configfile>/util/data/tabledet/modelweight/faster_rcnn_R_101_FPN_3x_config.yaml</configfile>
+            <inferimg>/util/data/tabledet/inference/inferimg</inferimg>
+            <infertableimg>/util/data/tabledet/inference/infertableimg</infertableimg>
+            <modeltestdir>/util/data/tabledet/testdir/test2021/images</modeltestdir>
+            <modeltestdf>/util/data/tabledet/testdir/test2021/images</modeltestdf>
+            <renamepdf></renamepdf>
+            <registerbook> XYZ</registerbook>
+            <docimage></docimage>
+            <annotatedfile>IMGandXML</annotatedfile>
+            <derivedannotation>CSVandCOCO</derivedannotation>
+            <traindataset>train2021</traindataset>
+            <valdataset>val2021</valdataset>
+            <testdataset></testdataset>
+            <modelsource></modelsource>
+            <outputdata></outputdata>
+            <slurmjob></slurmjob>
+        </tabledetection>
+        <tableinference category='table inference'>
+            <inferpdf></inferpdf>
+            <inferdocimage></inferdocimage>
+            <tabletocsv></tabletocsv>
+        </tableinference>
+        <textualdata category='textual information'>
+        </textualdata>
+    </dataset>
+<sourcecode category='source code'> 
+    <deeplearning category='deep learning'>
+        <modeltrain>
+        srccodepath
+        </modeltrain>
+        <modelinference>
+        only for test or inference path
+        </modelinference>
+    </deeplearning>
+    <webapp category='web application'>
+    django path
+    </webapp>
+</sourcecode>
+</matrixinformationextractor>

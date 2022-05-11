@@ -1,0 +1,99 @@
+{% extends "site/base.html" %}
+{% block title %}Matrix Data Extractor{% endblock %}
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+       
+       label{
+        padding-right: 1em;
+       }
+     
+        .project-info{
+            position: absolute;
+            background-color:#98c222;
+            top: 1em;
+            left: 30em;
+            padding: 1em 1em;
+            height: 10em;
+            width: 78em;
+         
+        }
+       
+        .link-desc{
+            position: absolute;
+            background-color: #98c222;
+            top: 14em;
+            left: 30em;
+            padding: 1em 1em;
+            height: 43em;
+            width: 78em;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<div class="index-structure">
+
+    <div class="project-info">
+        <p style="font-size:1.1em"> 
+            Plastic product technical data sheets offer high 
+            quality material information commonly in PDF format.  In general, such data extraction is quite complex due to diverse layout and visual appearance of 
+            PDF documents. Different plastic product manufacturers follow different types of document templates to provide the relevant information. An information
+            extraction pipeline is essential to integrate such material information into a comprehensive database that can then be leveraged by the stakeholders in 
+            the plastic recycling industry. Matrix Data Extractor Tool provides such services leveraging Computer Vision based Deep Learning algorithms.
+        </p>
+    </div>
+
+    <div class="link-desc">
+          <p> <b style="font-size:1.2em">Overview of other Link Description</b>
+            <ul>
+                <li><b style="font-size:1.2em">Synchronize Datasheet : </b> Insert your datasheets at disk to extract information. Shorten the technical datasheet
+                    PDF name if they are large. Very large filename is not recommended during dropdown selection.
+                </li>
+                <br>
+                <li><b style="font-size:1.2em">Datasheet Information Extraction : </b> Select manufacturers and corresponding technical datasheets from 
+                    dropdown lists to extract all document information from PDF documents in text format.
+                </li>
+                <br>
+                <li><b style="font-size:1.2em">Table Region Identification : </b> Select manufacturers and corresponding technical datasheets from
+                    dropdown lists to extract table image from PDF documents. Remove unwanted table images from disk to improve your dataset.
+                </li>
+                <br>
+                <li><b style="font-size:1.2em">Table Data Extraction : </b> Select manufacturers and corresponding technical datasheets to 
+                    extract table data into text format from extracted table images. Manufacturers and corresponding technical datasheets will be 
+                    available in this section if you have already extracted table images using Table Region Identification link. Otherwise you can not see
+                    your desired manufacturers and corresponding technical datasheets in dropdown lists.
+                </li>
+                <br>
+                <li><b style="font-size:1.2em">Transfer Data to Database : </b> Select manufacturers and corresponding technical datasheets to 
+                    transfer table data to MongoDB database. Manufacturers and corresponding technical datasheets will be 
+                    available in this section if you have already extracted table images using Table Region Identification link. Otherwise you can not see
+                    your desired manufacturers and corresponding technical datasheets in dropdown lists. Make sure that you have already extracted table data
+                    in text format using Table Data Extraction link. Otherwise your can not transfer your desired data to MongoDB database.
+                    <br><br>
+                    <b>Caution: </b>If you transfer same data multiple times, then you will upload redundant data at MongoDB database table. It also
+                    show redundant data at Search Information from Database link. To remove such redundant data, please remove redundant data from
+                    MongoDB database table.
+                </li>
+                <br>
+                <li><b style="font-size:1.2em">Search Table Information from Database : </b> Search your required table information from database by considering
+                    three text fields. You can filter out your search result. You will get manufacturer and technical datasheet names
+                    in search results. By clicking on each search result, you will expand table information on your screen. 
+                    <br><br>
+                    <b>Note: </b> You will get maximum 20 search 
+                    results on your screen. If you want to increase this number, please contact your development team.
+                </li>
+
+              </ul>
+          </p>
+        
+    </div>
+
+   
+</div>
+{% endblock %}

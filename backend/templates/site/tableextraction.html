@@ -1,0 +1,159 @@
+{% extends "site/index.html" %}
+
+{% block title %}Table Region Detection and Extraction{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+<style type="text/css">
+
+    .tab-reg-extract-info{
+        position: absolute;
+        background-color: #98c222;
+        top: 1em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 49em;
+        width: 78em;
+    }
+    .tab-reg-detection{
+        position: absolute;
+        background-color: #98c222;
+        top: 52em;
+        left: 30em;
+        height: 15em;
+        width: 78em;
+        padding: 1em 1em;
+    }
+    .tab-extract-status{
+        font-size:  medium;
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_cascading_dropdown
+
+        const tds_new_dict ={{tds_new_dict|safe}};
+        
+    
+        window.onload = function() {
+        let manufacturerSel = document.getElementById("manufacturer");
+        let tdslistSel = document.getElementById("tdslist");
+
+        for (let x in tds_new_dict) {
+            // manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+            //console.log(x, x.valueOf)
+            manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+        }
+        
+        manufacturerSel.onchange = function() {    
+         //empty Chapters dropdown
+         tdslistSel.length = 1;
+            //display correct values
+            //var z = tds_list[this.value];
+            let pre_tds_list = tds_new_dict[this.value].replace("[","").replace("]","");
+            const final_tds_list = pre_tds_list.split(",");
+            //console.log(z);
+            for (var i = 0; i < final_tds_list.length; i++) {
+                tdslistSel.options[tdslistSel.options.length] = new Option(final_tds_list[i].replace(/['"]+/g, ''), final_tds_list[i]);
+            }
+        }
+        
+    }
+
+
+</script>
+
+<div class="tab-reg-extract-structure"></div>  
+    <div class="tab-reg-extract-info">
+        <h3>
+            How Table Region Identification Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em">
+            <ul>
+                <li>
+                    Select Manufacturer and corresponding Technical Datasheets from dropdown lists.
+               </li>
+               <br>
+               <li>
+                    Click on <b>Extract Table Image</b> button.
+               </li>
+               <br>
+               <li>
+                    Go to <b>util -> data -> tabledet -> inference</b> folder and find 2 sub-folders- <b>inferimg and infertableimg</b>. 
+               </li>
+               <br>
+               <li>
+                    <b>inferimg : </b> It contains Manufacturer sub-folders. Within each Manufacturer sub-folders, there are Technical Datasheet sub-folders, e.g.,
+                    <b>LyondellBasell</b> sub-folder contains another sub-folders with Technical Datasheet names, e.g., <b>Circulen 2420D Plus and Lucalen A2700P</b> 
+                    sub-folders. If you access one of them, you can see each PDF page of the technical datasheet in image format. 
+               </li>
+               <br>
+               <li>
+                    If each Technical Datasheet sub-folder (e.g. <b> Circulen 2420D Plus</b>) contains images and if Document Tables exist, 
+                    then you will see colorful rectangular boundary boxes that point a table or multiple tables on a document image.
+               </li>
+               <br>
+               <li>
+                   <b>For Advanced User : </b> A CSV file is also created in this sub-folder (e.g. <b> Circulen 2420D Plus</b>) which stores co-ordinates of 
+                   pixel values of those rectangular boundary boxes.
+               </li>
+               <br>
+               <li>
+                   <b>For Advanced User : </b> There are 3 types error appeared in Document Table Detection methods- Partial-detection, Un-detection and Mis-detection.
+                   If such scenario occurs, then delete corresponding wrong co-ordinate values from CSV file. These co-ordinate values stored in CSV file are 
+                   considered for further table data extraction operations. 
+               </li>
+               <br>
+               <li>
+                <b>infertableimg : </b> It contains Manufacturer sub-folders. Within each Manufacturer sub-folders, there are Technical Datasheet sub-folders, e.g.,
+                <b>LyondellBasell</b> sub-folder contains another sub-folders with Technical Datasheet names, e.g., <b>Circulen 2420D Plus and Lucalen A2700P</b> 
+                sub-folders. If you access one of them, you can see document table images in each Technical Datasheet sub-folder. These tables are extracted from
+                the images stored within <b> inferimg </b> folder. If a wrong table image is extracted due to above mentioned 3 erros, delete that image 
+                immediately. Optical Character Recognition (<b>OCR</b>) based techniques will be used to extract table data from those table images.
+               </li>
+               <br>
+               <li>
+                   If any document table is missed to idenfy by Deep Learning algorithms on your dataset, please crop the table images and placed in the 
+                   corresponding sub-folders within <b>infertableimg</b> folder.
+               </li>
+
+            </ul>
+          
+        </p>
+</div>
+
+<div  class="tab-reg-detection">
+    <form method="post" id="tableextraction" action="/tableextraction/"> 
+            {% csrf_token %}
+
+            <div class="tab-bbox-extract">
+                <label><b> Manufacturer  </b></label>
+                {% load cache %}
+                    <select name="manufacturer" id="manufacturer" style="margin-left:4.2em; margin-right:1em">
+                        <option value="" selected="selected">Select Manufacturer</option>
+                    </select>
+                    <br><br>
+                <label><b> Technical Datasheet </b></label>
+                    <select name="tdslist" id="tdslist" style="margin-left:1em; margin-right:1em">
+                        <option value="" selected="selected">Please select Manufacturer first</option>
+                    </select>
+                <button type="submit" class="btn btn-primary" name="extracttable" value="extracttable">Extract Table Image</button>
+                <br> <br>
+                <div class="tab-extract-status">
+                    <p >{{table_extract_status}}</p>
+                </div>
+               
+            </div>
+    </form>
+</div>
+</div>
+{% endblock %}
+

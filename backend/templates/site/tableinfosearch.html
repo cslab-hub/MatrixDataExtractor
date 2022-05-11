@@ -1,0 +1,152 @@
+{% extends "site/index.html" %}
+
+{% block title %}Table Region Detection and Extraction{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+<style type="text/css">
+
+    .db-data-extract-info{
+        position: absolute;
+        background-color: #98c222;
+        top: 1em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 28em;
+        width: 78em;
+    }
+    .db-es-search-{
+        position: absolute;
+        background-color: #98c222;
+        top: 20em;
+        left: 25em;
+        height: 30em;
+        width: 78em;
+        padding: 1em 1em;
+    }
+    .es-search-criteria{
+        position: absolute;
+        background-color: #98c222;
+        top: 30em;
+        left: 30em;
+        width: 78em;
+        padding: 1em 1em;
+    }
+    .search-info-status{
+        font-size:  medium;
+        font-weight: bold;
+        color: white;
+    }
+
+    table{ width: 100%; }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_cascading_dropdown
+
+    $(function() {
+        $("td[colspan=3]").find("p").hide();
+        $("table").click(function(event) {
+            event.stopPropagation();
+        var $target = $(event.target);
+        if ( $target.closest("td").attr("colspan") > 1 ) {
+            //$target.slideUp();
+            target.closest("td").children("p").slideUp();
+        } else {
+            $target.closest("tr").next().find("p").slideToggle();
+        }                    
+    });
+});
+</script>
+
+<div class="db-data-extract-structure"></div>  
+    <div class="db-data-extract-info">
+        <h3>
+            How Search Table Information from Database Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em">
+            <ul>
+                <li>
+                    <b>Please make sure your Elasticsearch service is up and running, otherwise you shall get error messages on your screen.</b>
+                </li>
+                <br>
+                <li>
+                    If your relevant data is stored in MongoDB database, you can retrive your data by leveraging search functionality. The search result
+                    provides rows in 2 columns- <b>Manufacturer and Technical Datasheet</b>. 
+                </li>
+                <br>
+                <li>
+                    Enter full name of <b>Manufacturer</b> (e.g. <b>LyondellBasell</b>) or enter full name of <b>Technical Datasheet</b> 
+                    (e.g <b>Circulen 2420F Plus</b>) or enter any keyword which is present in table data in <b>Keyword for Table Data</b> text box. 
+                    If it matches, then you can see <b>rows under Manufacturer and Technical Datasheet column names</b>. Partial match of Manufacturer
+                    and Technical Datasheet names are not possible to restrict unnecessary search results. 
+                </li>
+                <br>
+                <li>
+                    If you find your search result, expand each row for further analysis.
+                </li>
+                <br>
+                <li>
+                    If you want to filter out your search result, then combine your search keywords (e.g. <b>LyondellBasell</b> and  <b>Circulen 2420F Plus</b>) 
+                    in corresponding text boxes to get filtered search result.
+                </li>
+            </ul>
+        </p>
+</div>
+
+<div  class="db-es-search">
+    <form method="post" id="tableinfosearch" action="/tableinfosearch/"> 
+            {% csrf_token %}
+
+            <div class="es-search-criteria">
+                <label><b> Manufacturer  </b></label>
+                {% load cache %}
+                    <input name="manufacturer" id="manufacturer" type="search" placeholder="Manufacturer Name" value=""  style="margin-left:4.8em; margin-right:1em">
+                <br><br>
+                <label><b> Technical Datasheet </b></label>
+                    <input name="tdsname" id="tdsname" type="search" placeholder="Technical Datasheet Name" value = ""  style="margin-left:1.6em; margin-right:1em">
+                <br><br>
+                <label><b> Keyword for Table Data </b></label>
+                    <input name="tabledata" id="tabledata" type="search" placeholder="Table Information Keyword" value = ""  style="margin-left:0.1em; margin-right:1em">
+                
+                    <button type="submit" class="btn btn-primary" name="gettabinfo" value="gettabinfo">Show Search Result</button>
+                    <br><br>
+                <div class="search-info-status">
+                    {% if es_result %}
+                    <table>
+                        <tr>
+                            <th align="left"> Manufacturer </th>
+                            <th align="right"> Technical Datasheet </th>
+                        </tr>
+                        {% for tdsitem in es_result %}
+                        <tr>
+                            <td><p>{{tdsitem.0}}</p></td>
+
+                            <td><p>{{tdsitem.1}}</p></td>
+                        </tr>
+                        <tr>  
+                            <td colspan="3">
+                                <p style="white-space: pre-line">{{tdsitem.2}}</p>
+                            </td>
+                        </tr>
+                    
+                        {% endfor %}
+                    </table>
+                    {% elif not es_result %}
+                    <p> Get your search result here</p>
+                    {% endif %}
+                </div>
+
+                </div>
+               
+            </div>
+    </form>
+</div>
+</div>
+{% endblock %}
+

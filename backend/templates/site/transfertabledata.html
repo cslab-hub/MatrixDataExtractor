@@ -1,0 +1,128 @@
+{% extends "site/index.html" %}
+
+{% block title %}Transfer Table Data{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+<style type="text/css">
+
+    .transfer-tab-data-info{
+        position: absolute;
+        background-color: #98c222;
+        top: 1em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 30em;
+        width: 78em;
+    }
+    .tab-data-transfer{
+        position: absolute;
+        background-color: #98c222;
+        top: 33em;
+        left: 30em;
+        height: 15em;
+        width: 78em;
+        padding: 1em 1em;
+    }
+    .tab_img_list{
+        font-size:  medium;
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<script>
+    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_cascading_dropdown
+
+    const tds_new_dict ={{tds_new_dict|safe}};
+    
+    window.onload = function() {
+    let manufacturerSel = document.getElementById("manufacturer");
+    let tdslistSel = document.getElementById("tdslist");
+    
+    for (let x in tds_new_dict) {
+        manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+    }
+    
+    manufacturerSel.onchange = function() {    
+        //empty Chapters dropdown
+        tdslistSel.length = 1;
+        //display correct values
+        //var z = tds_list[this.value];
+        let final_tds_list = tds_new_dict[this.value];
+        //console.log(z);
+        for (var i = 0; i < final_tds_list.length; i++) {
+            tdslistSel.options[tdslistSel.options.length] = new Option(final_tds_list[i].replace(/['"]+/g, ''), final_tds_list[i]);
+        }
+    }
+}
+
+</script>
+
+<div class="transfer-tab-data-structure"></div>  
+    <div class="transfer-tab-data-info">
+        <h3>
+            How Transfer Data to Database Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em"> 
+           <ul>
+                <li>
+                    <b>Please make sure your MongoDB database is up and running, otherwise you are not able to transfer data to MongoDB database.</b>
+                </li>
+                <br>
+               <li>
+                    <b>Make sure you have extracted table data into text files using Table Data Extraction link.</b> Otherwise your data is not being transferred
+                    to MongoDB database. You can use MongoDB Compass Graphical User Interface (GUI) Tool to analyze data which is stored in MongoDB database. 
+               </li>
+               <br>
+               <li>
+                Select Manufacturer and corresponding Technical Datasheets from dropdown lists.
+               </li>
+               <br>
+               <li>
+                    Click on <b>Transfer Table Data</b> button. If table data is already extracted in text file format using Table Data Extraction link, 
+                    then your data is transferred to MongoDB database.
+               </li>
+               <br>
+               <li>
+                   You can update or delete data from MongoDB database by using MongoDB Compass Tool.
+               </li>
+               <br>
+               <li>
+                   <b>MongoDB</b> is a cross-platform document-oriented NOSQL database. For more details about MongoDB and MongoDB Compass,
+                   please click-on <a href="https://www.mongodb.com/" target="_blank">MongoDB Overview</a> 
+                   and <a href="https://www.mongodb.com/products/compass" target="_blank">MongoDB Compass Overview</a>
+               </li>               
+           </ul>
+        </p>
+    </div>
+    
+    <form method="post" name="transfertabledata" action="/transfertabledata/"> 
+            {% csrf_token %}
+
+            <div class="tab-data-transfer">
+            
+                <label><b> Manufacturer  </b></label>
+                <select name="manufacturer" id="manufacturer" style="margin-left:4.2em; margin-right:1em">
+                    <option value="" selected="selected">Select Manufacturer</option>
+                </select>
+                <br><br>
+                <label><b> Technical Datasheet </b></label>
+                <select name="tdslist" id="tdslist" id="manufacturer" style="margin-left:1em; margin-right:1em">
+                    <option value="" selected="selected">Please select Manufacturer first</option>
+                </select>
+                <button type="submit" class="btn btn-primary" name="gettableimage" value="gettableimage" onload = "getTableImgList()">Transfer Table Data</button>
+            </div>
+            <div class="tab_img_list">
+                <p >{{table_img_list}}</p>
+            </div>
+            
+            </div>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,123 @@
+{% extends "site/index.html" %}
+
+{% block title %}All Information{% endblock %}
+{% block head %}
+    {{ block.super }}
+<style type="text/css">
+
+    .tds-extract-info{
+        position: absolute;
+        background-color: #98c222;
+        top: 1em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 30em;
+        width: 78em;
+    }
+    .select-manf-tds{
+        position: absolute;
+        background-color: #98c222;
+        top: 35em;
+        left: 30em;
+        padding: 1em 1em;
+        height: 15em;
+        width: 78em;
+    }
+    .file-status{
+        font-size:  medium;
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript">
+        // --- For Testing ---
+        tds_list = {
+            "DuPont": "['Elvax3174.pdf', 'Tefzel h59851.pdf', 'Texin285-Bayer-TPU.pdf', 'DowLex2035E.pdf']",
+            "Borealis": "['Borealis Borecen M8343.pdf', 'Borealis-MG 9641.pdf', 'Borealis_PP_EF015AE.pdf']", 
+            "Bayer": "['Texin285-Bayer-TPU.pdf', 'Bayplastics-HIPS.pdf']"
+            }
+        // --- Testing Done ---
+        const tds_new_dict ={{tds_new_dict|safe}};
+
+        window.onload = function() {
+        let manufacturerSel = document.getElementById("manufacturer");
+        let tdslistSel = document.getElementById("tdslist");
+
+        for (let x in tds_new_dict) {
+            // manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+            //console.log(x, x.valueOf)
+            manufacturerSel.options[manufacturerSel.options.length] = new Option(x, x);
+        }
+        
+        manufacturerSel.onchange = function() {    
+        //empty Chapters dropdown
+        tdslistSel.length = 1;
+            //display correct values
+            //var z = tds_list[this.value];
+            let pre_tds_list = tds_new_dict[this.value].replace("[","").replace("]","");
+            const final_tds_list = pre_tds_list.split(",");
+            //console.log(z);
+            for (var i = 0; i < final_tds_list.length; i++) {
+                tdslistSel.options[tdslistSel.options.length] = new Option(final_tds_list[i].replace(/['"]+/g, ''), final_tds_list[i]);
+            }
+        }
+    }
+
+</script>
+
+<div class="textextract-structure">
+    <div class="tds-extract-info">
+        <h3>
+            How Datasheet Information Extraction Works
+        </h3>
+        <br>
+        <p style="font-size:1.2em">
+           <ul>
+               <li>
+                    Select Manufacturer and corresponding Technical Datasheets from dropdown lists.
+               </li>
+               <br>
+               <li>
+                    Click on <b>Extract Data</b> button. 
+               </li>
+               <br>
+               <li>
+                    Go to <b>util -> data -> extractedinfo -> textualdata</b> folder and find sub-folder of selected manufacturer name. Access it to find text file
+                    which starts with selected technical datasheet name.
+               </li>
+               <br>
+               <li>
+                    Search option is coming soon on these text files.
+               </li>
+           </ul>
+        </p>
+    </div>
+
+    <div  class="tds-extract">
+    <form method="post" id="id_text_extraction" name="text_extraction" action="/textextraction/"> 
+            {% csrf_token %}
+            <div class="select-manf-tds">
+                <label><b> Manufacturer  </b></label>
+                    {% load cache %}
+                    <select name="manufacturer" id="manufacturer"  style="margin-left:4.2em; margin-right:1em">
+                        <option value="" selected="selected">Select Manufacturer</option>
+                    </select>
+                <br><br>
+                <label><b> Technical Datasheet </b></label>
+                    <select name="tdslist" id="tdslist" style="margin-left:1em; margin-right:1em">
+                        <option value="" selected="selected">Please select Manufacturer first</option>
+                    </select>
+                <button type="submit" class="btn btn-primary" name="extractdata" value="extractdata">Extract Data</button>
+                <br> <br> 
+                <p class="file-status">{{file_status}}</p>
+            </div>
+    </form>
+    </div>
+</div>
+{% endblock %}
+

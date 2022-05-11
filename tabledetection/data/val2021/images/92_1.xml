@@ -1,0 +1,26 @@
+<annotation>
+	<folder>pdf_img_2</folder>
+	<filename>92_1.jpg</filename>
+	<path>/home/aghoshchowdh/Documents/Project/MatrixDataExtractor/data/pdf_img_2/92_1.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4250</width>
+		<height>5500</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Table</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>274</xmin>
+			<ymin>221</ymin>
+			<xmax>2986</xmax>
+			<ymax>679</ymax>
+		</bndbox>
+	</object>
+</annotation>
