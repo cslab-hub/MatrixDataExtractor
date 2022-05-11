@@ -7,7 +7,7 @@ The installation process is mentioned on parent README file.
 
 # Pre-requisite
 
-Copy table detection model weight from '/tabledetection/diplastmodel/model_final.pth' and paste at '/backend/util/data/tabledet/modelweight' folder. The model weight is not provided here. You can use any table detection model weight and relevant config file. You need to rename config file to 'uos_dip_config.yaml'. For more 'backend' web application specific setting, check or edit /util/prop/MDE.xml file.
+Copy table detection model weight from */tabledetection/diplastmodel/model_final.pth* and paste at */backend/util/data/tabledet/modelweight* folder. The model weight is not provided here. You can use any table detection model weight and relevant config file. You need to rename config file to *uos_dip_config.yaml*. For more 'backend' web application specific setting, check or edit */util/prop/MDE.xml* file.
 **NOTE:** Secret Key for Django web application is not provided here, which should be inserted at 'mde.env' file.
 
 # How to run web application
