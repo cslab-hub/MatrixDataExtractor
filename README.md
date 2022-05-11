@@ -11,7 +11,7 @@ First you need to get Table Detection model weight from '/tabledetection/diplast
 ## backend - Web Application
 'backend' is a Django based web application which gives a basic user interface to plastic experts to store their PDF files on disk and allows to extract table data by applying Deep Learning and OCR (Optical Character Recognition). It also provide services to store table data in MongoDB and can also provide search functionality of those data using Keywords. Web application specific config file is provided as '/backend/util/prop/MDE.xml'.
 
-**NOTE:** Secret Key for Django web application is not provided here, which should be inserted at mde.env file. 
+**NOTE:** Secret Key for Django web application is not provided here, which should be inserted at 'mde.env' file. 
 
 For more details, check README files of 'backend' and 'tabledetection' sections.
 
