@@ -81,6 +81,8 @@ You can evaluate the model by executing src/test.py file as-
 
 $ python test.py
 
+If you are training the model in Slurm mode, you can execute below commnad- 
+
 $ sbatch mde.sh
 
 ## 'backend'
