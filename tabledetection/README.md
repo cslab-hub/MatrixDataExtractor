@@ -4,7 +4,7 @@ MDE Table Detection is a document table detection Framework trained on domain sp
 # How to install
 The installation process is mentioned on parent README file. If you want to export your model (e.g. for C++ developers) using TorchScript. You can install below depencies-
 ```
-$ pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+(env_mde)$ pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 # Table Detection Model Weights and Datasets
