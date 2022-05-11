@@ -81,8 +81,6 @@ You can evaluate the model by executing src/test.py file as-
 
 $ python test.py
 
-A Jupyter Notebook is provided to show evaluation and inference of the document table detection model on domain specific dataset. If you use Slurm mode, you can execute the script as 
-
 $ sbatch mde.sh
 
 ## 'backend'
