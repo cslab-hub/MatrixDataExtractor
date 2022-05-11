@@ -11,17 +11,17 @@ The installation process is mentioned on parent README file. If you want to expo
 The Table Detection model weight and annotated datasets are not provided publicly. You can use document table detection bechmark datasets (e.g. PubLayNet, TableBank, ICDAR table detection datasets) for your research work.
 
 # Pre-trained Model
-Pre-trained TableBank model weights and config files are downloaded from Layout-Parser. 'faster_rcnn_R_101_FPN_3x' is used in Matrix Data Extractor Table Detection. For model weights, go to below link-
+Pre-trained TableBank model weights and config files are downloaded from *Layout-Parser*. *faster_rcnn_R_101_FPN_3x* is used in Matrix Data Extractor Table Detection. For model weights, go to below link-
 - https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L36
 
 For config files, go to below link-
 - https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L62
 
-**NOTE:** The link can be changed if Layout-Parser change their code structure.
+**NOTE:** The link can be changed if *Layout-Parser* change their code structure.
 
 
 # Table Detection model - Training and Testing
-The trainign and testing processes are mentioned on parent README file.
+The training and testing processes are mentioned on parent README file.
 
 ## Export Model
 Execute below command to export model using TorchScript-
