@@ -83,7 +83,7 @@ If you are infering your model, you need to create */tabledetection/inferimg/* f
 ```
 $ bash -i infer.sh
 ```
-**NOTE:** Make sure all paths to access files and folders are mentioned in corresponding variables in code. You can analyze code to get an idea.
+**NOTE:** Make sure all paths to access files and folders are correctly mentioned in corresponding variables in code. You can analyze this code to get an idea.
 
 ## backend
 Run web application on Linux OS by executing start.sh shell script as-
