@@ -79,10 +79,11 @@ If you are training the model in Slurm mode, you can execute below commnad-
 ```
 $ sbatch mde.sh
 ```
-If you are infering your model, you need to create */tabledetection/inferimg/* folder and change image filename (*img_path* variable value) at line 131 of *infer.py* file. Then execute below command-
+If you are infering your model, you need to create */tabledetection/inferimg/* folder and execute below command-
 ```
-$ python infer.py
+$ bash -i infer.sh
 ```
+**NOTE:** Make sure all paths to access files and folders are mentioned in corresponding variables in code. You can analyze code to get an idea.
 
 ## backend
 Run web application on Linux OS by executing start.sh shell script as-
