@@ -12,10 +12,10 @@ The Table Detection model weight and annotated datasets are not provided publicl
 
 # Pre-trained Model
 Pre-trained TableBank model weights and config files are downloaded from Layout-Parser. 'faster_rcnn_R_101_FPN_3x' is used in Matrix Data Extractor Table Detection. For model weights, go to below link-
-https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L36
+- https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L36
 
 For config files, go to below link-
-https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L62
+- https://github.com/Layout-Parser/layout-parser/blob/main/src/layoutparser/models/detectron2/catalog.py#L62
 
 **NOTE:** The link can be changed if Layout-Parser change their code structure.
 
