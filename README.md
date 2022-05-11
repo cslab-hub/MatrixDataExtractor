@@ -3,19 +3,20 @@ Matrix Data Extractor (MDE) is a web based application that identifies table reg
 
 Plastic product technical data sheets offer high quality material information commonly in PDF format. Data extraction from such PDF documents is quite complex due to diverse layout and visual appearance of PDF documents. Different plastic product manufacturers follow different types of document templates to provide the relevant information. An information extraction pipeline is essential to integrate such material information into a comprehensive database that can then be leveraged by the stakeholders in the plastic recycling industry. Matrix Data Extractor Tool provides such services leveraging Computer Vision based Object Detection algorithm (Faster R-CNN). Matrix Data Extractor contains two sections- 'backend' and 'tabledetection'. 'tabledetection' is developed on PyTorch 1.8.0 and Detectron2 libraries. Till date Detectron2 library provides official support for Linux OS only, so running 'backend' and 'tabledetection' without Linux OS is not recommended.
 
-First you need to get Table Detection model weight from /tabledetection/diplastmodel/model_final.pth and paste at /backend/util/data/tabledet/modelweight folder. The model weight is not provided here. Also domain specific annotated dataset for table detection is not provided here. If you want, you can use Table Detection benchmark datasets such as PubLayNet, TableBank, ICDAR document table detection datasets. The utility functions are provided to convert the dataset from PASCAL-VOC format either to COCO format or to TSV (Tab-Separated Values) format at /tabledetection/dataprep_util folder. 
+First you need to get Table Detection model weight from '/tabledetection/diplastmodel/model_final.pth' and paste at '/backend/util/data/tabledet/modelweight' folder. The model weight is not provided here. Also domain specific annotated dataset for table detection is not provided here. If you want, you can use Table Detection benchmark datasets such as PubLayNet, TableBank, ICDAR document table detection datasets for your experiment. The utility functions are provided to convert the dataset from PASCAL-VOC format either to COCO format or to TSV (Tab-Separated Values) format (in .csv files) at '/tabledetection/dataprep_util' folder. 
 
 ## tabledetection - Deep Learning Model
 'tabledetection' is a document table detection framework based on PyTorch and Detectron2 libraries which helps to identify document tables (rectangular boundary box) on PDF documents. It follows Faster R-CNN Object Detection algorithm and uses transfer learning method by incorporating TableBank pre-trained model. The pre-trained model can be downloaded from Layout-Parser (https://github.com/Layout-Parser/layout-parser). 
 
 ## backend - Web Application
 'backend' is a Django based web application which gives a basic user interface to plastic experts to store their PDF files on disk and allows to extract table data by applying Deep Learning and OCR (Optical Character Recognition). It also provide services to store table data in MongoDB and can also provide search functionality of those data using Keywords.
+
 **NOTE**: Secret Key for Django web application is not provided here, which should be inserted at mde.env file. 
 
 For more details, check README files of 'backend' and 'tabledetection' sections.
 
 # How to install
-Create a conda environment on your Linux OS. Here ENVNAME is considered as env_mde. 
+Create a conda environment on your Linux OS. Here ENVNAME is considered as **env_mde**. 
 $ conda create -n env_mde python=3.8
 $ conda activate env_mde
 
