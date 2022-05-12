@@ -1,10 +1,8 @@
-import torch
 import numpy as np
 import json
 import os
 import copy
 import itertools
-import os
 import random
 import torch
 import detectron2
@@ -18,7 +16,6 @@ from detectron2.data.datasets import register_coco_instances
 from detectron2.utils.logger import setup_logger
 setup_logger()
 
-import random
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib import patches
