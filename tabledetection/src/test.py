@@ -1,10 +1,8 @@
-import torch
 import numpy as np
 import json
 import os
 import copy
 import itertools
-import os
 import random
 import torch
 import detectron2
