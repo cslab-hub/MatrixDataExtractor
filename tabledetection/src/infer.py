@@ -86,9 +86,9 @@ def main():
 
     print(torch.__version__, " , ", torch.cuda.is_available())
 
-    VAL_DIR = '../data/val2021'
-    TEST_DIR = '../data/test2021'
-    test_df = pd.read_csv('../data/annotations/diplast2021_test.csv')
+    VAL_DIR = 'data/val2021'
+    TEST_DIR = 'data/test2021'
+    test_df = pd.read_csv('data/annotations/diplast2021_test.csv')
     _, test_dataset = register_dataset(
         test_df, dataset_label='test_dataset', image_dir=TEST_DIR)
 
@@ -105,8 +105,8 @@ def main():
     DatasetCatalog.clear()
     
     # Dataset for testing and evaluation
-    register_coco_instances("val_coco", {}, "../data/annotations/instances_val2021.json", "../data/val2021/images")
-    register_coco_instances("test_coco", {}, "../data/annotations/instances_test2021.json", "../data/test2021/images")
+    register_coco_instances("val_coco", {}, "data/annotations/instances_val2021.json", "data/val2021/images")
+    register_coco_instances("test_coco", {}, "data/annotations/instances_test2021.json", "data/test2021/images")
     
     # Testing and Evaluation Setup
     cfg = get_cfg()
@@ -125,11 +125,8 @@ def main():
 
     mde_test_metadata = MetadataCatalog.get("test_coco")
     predictor = DefaultPredictor(cfg)
-    '''
-    img_path = '../data/test2021/images/114_0.jpg'
-    im = cv2.imread(img_path)
-    '''
-    test_dir = '../data/test2021/images'
+    
+    test_dir = 'data/test2021/images'
     for filename in os.listdir(test_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
             img_path = os.path.join(test_dir,filename)
