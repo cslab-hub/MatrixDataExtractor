@@ -1,7 +1,7 @@
 # tabledetection - Deep Learning model
-MDE Table Detection is a document table detection Framework trained on domain spefici dataset based on Supervised Learning method which uses PyTorch 1.8.0 and Detectron2 library to identify document table (rectangular boundary box) region on plastic product technical datasheets. 
+MDE Table Detection is a document table detection Framework trained on domain specific dataset based on Supervised Learning Object Detection method which uses PyTorch 1.8.0 and Detectron2 library to identify document table (rectangular boundary box) region on plastic product technical datasheets. 
 
-**NOTE:** To increase the accuracy of table detection model, expansion of annotated dataset is an important factor.
+**NOTE:** To increase the accuracy of table detection model, expansion of annotated dataset can be an important factor. You can annotation tool such as LabelImg (https://github.com/tzutalin/labelImg) to annotate document table rectangular boundary box region to create your personal annotated dataset.
 
 # How to install
 The installation process is mentioned on parent README file. If you want to export your model (e.g. for C++ developers) using TorchScript. You can install below depencies. Here ENVNAME is considered as **env_mde**.
