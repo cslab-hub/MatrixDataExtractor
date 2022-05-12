@@ -34,9 +34,9 @@ To install basic dependencies execute below commands (other versions can work bu
 $ pip install -r requirements.txt
 ```
 If OpenCV library is not installed properly, try to install by executing below command-
-
+```
 (env_mde)$ pip install opencv-python
-
+```
 *tabledetection* model is trained on GPU server and *backend* web application is running on CPU using PyTorch 1.8.0 and relevant Detectron2 library on Linux OS. If you want to train your Deep Learning model, check your CUDA version and install PyTorch 1.8.0 and relevant Detectron2 library. You can get information from below links-
 - https://pytorch.org/get-started/previous-versions/
 - https://detectron2.readthedocs.io/en/latest/tutorials/install.html
