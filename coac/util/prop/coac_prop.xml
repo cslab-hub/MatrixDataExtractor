@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<matrixinformationextractor>
+    <dataset category='dataset'>
+        <tabledetection category='table detection'>
+            <sourcepdf>/util/data/srcpdf</sourcepdf>
+            <tempimgdir>/util/data/tempimgdir</tempimgdir>
+            <inferimgdir>/util/data/inferimgdir</inferimgdir>
+        </tabledetection>
+        <tableinference category='table inference'>
+            <inferpdf></inferpdf>
+            <inferdocimage></inferdocimage>
+            <tabletocsv></tabletocsv>
+        </tableinference>
+        <textualdata category='textual information'>
+        </textualdata>
+    </dataset>
+<sourcecode category='source code'> 
+    <deeplearning category='deep learning'>
+        <modeltrain>
+        srccodepath
+        </modeltrain>
+        <modelinference>
+        only for test or inference path
+        </modelinference>
+    </deeplearning>
+    <webapp category='web application'>
+    django path
+    </webapp>
+</sourcecode>
+</matrixinformationextractor>
