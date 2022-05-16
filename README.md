@@ -90,4 +90,4 @@ Run web application on Linux OS by executing start.sh shell script as-
 ```
 $ bash -i start.sh 
 ```
-**Disclaimer:** Matrix Data Extractor tool is funded by the Interreg North-West Europe program (Interreg NWE), project Di-Plast - Digital Circular Economy for the Plastics Industry (NWE729). Any further support after end of this project will not be provided unfortunately.
+**Disclaimer:** Matrix Data Extractor tool is funded by the Interreg North-West Europe program (Interreg NWE), project Di-Plast - Digital Circular Economy for the Plastics Industry (NWE729, https://www.nweurope.eu/projects/project-search/di-plast-digital-circular-economy-for-the-plastics-industry/). Any support to provide table detection model will not be provided unfortunately. The accuracy of table detection model depends on various factors such as volume, variety of annotated datasets, hyperparameters of model. You can do your experiment to get better accuracy of your table detection model.
