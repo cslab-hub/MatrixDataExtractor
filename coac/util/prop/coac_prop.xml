@@ -2,10 +2,10 @@
 <matrixinformationextractor>
     <dataset category='dataset'>
         <tabledetection category='table detection'>
-            <sourcepdf>/util/data/coac/srcpdf</sourcepdf>
-            <tempimgdir>/util/data/coac/tempimgdir</tempimgdir>
-            <inferimgdir>/util/data/coac/inferimgdir</inferimgdir>
-            <infertableimgdir>/util/data/coac/infertableimgdir</infertableimgdir>
+            <sourcepdf>/util/data/srcpdf</sourcepdf>
+            <tempimgdir>/util/data/tempimgdir</tempimgdir>
+            <inferimgdir>/util/data/inferimgdir</inferimgdir>
+            <infertableimgdir>/util/data/infertableimgdir</infertableimgdir>
         </tabledetection>
         <tableinference category='table inference'>
             <inferpdf></inferpdf>

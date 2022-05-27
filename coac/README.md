@@ -20,7 +20,9 @@ bash -i pre_process.sh
 ```
 bash -i infer.sh
 ```
-- Bounding box (BBox) information during model inference is stored in */util/prop/bbox_info.csv* file.
+- Bounding box (BBox) information during model inference is stored in */util/prop/bbox_info.csv* file. The data in this csv file is stored into below format
+*Filename_PageNo, TABLE_NO, X_MIN, Y_MIN, X_MAX, Y_MAX*, where *PageNo* and *TABLE_NO* is started with index zero, not one.
+
 # Execute Streamlit Application
 - If you want to execute streamlit application to extract table structure in an interactive mode, run below command
 ```
