@@ -21,6 +21,9 @@ class DocListForm(forms.Form):
         model = Datasheet
         fields = '__all__'
 
+class MergeImgFileForm(forms.Form):
+    manufacturer = forms.CharField(label="manufacturer")
+
 class DataExtractForm(forms.Form):
     manufacturer = forms.CharField(label="manufacturer")
     tdslist = forms.CharField(label="tdslist")

@@ -64,6 +64,7 @@ class MatrixTextExtractor(object):
             self.temp_imgtotext_dir = os.getcwd()  + child_element.find('imgtotext').text
             self.temp_tabulardata_dir = os.getcwd()  + child_element.find('tabulardata').text
             self.infertableimg = os.getcwd() + child_element.find('infertableimg').text
+            self.storetableimg = os.getcwd() + child_element.find('storetableimg').text
 
 
     '''
@@ -138,6 +139,51 @@ class MatrixTextExtractor(object):
             '''
         imagefile_set.clear()
         return temp_imgtotext_filename
+    
+    '''
+    Read property file, take manufacturer name, TDS name, table image names.
+    Merge as manf_tds_imgid.jpg format
+
+    Input: property filename and plastic product name retrieved from plastic product technical data sheet.
+    Output: Return None. Stores images and text files in corresponding directory.
+    
+    '''
+    def merge_table_img(self, manufacturer, tds) :
+        tds = str(tds).strip('\'')
+        print("manufacturer:", manufacturer)
+        ''' Check Parent image_dir (util/data/tempimg/textdata) and create subdir(Manufacturer Names) if not exists '''
+        Path(self.storetableimg).mkdir(parents=True, exist_ok=True)
+        Path(self.storetableimg + "/" + manufacturer).mkdir(parents=True, exist_ok=True)
+
+        ''' Get 'infertableimg' directory information '''
+        tds = tds.replace('.pdf','').replace('\'','')
+        dir_image = self.infertableimg + "/" + manufacturer + "/" + tds
+        target_img_dir = self.storetableimg + "/" + manufacturer
+        
+        imagelist = Path(dir_image).rglob('*.jpg')
+        imagefile_set = set()
+        imagefile_set.clear()
+        for imagename in imagelist:
+            image_in_str = str(imagename).strip("")
+            imagefile_set.add(image_in_str)
+
+        imagefile_set = sorted(imagefile_set)
+       
+        ''' Save image files in single folder'''
+        table_img_set = set()
+        for img_path in imagefile_set:
+            img = cv2.imread(img_path)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            table_img_file = os.path.basename(img_path)
+            table_img_set.add(str(table_img_file))
+            print("table_img_file: ", table_img_file)
+            imagefile = target_img_dir + "/" + tds + "_" + table_img_file
+            '''Save images'''
+            cv2.imwrite(imagefile,img)
+
+        return table_img_set
+
+
 
 
     '''
@@ -632,6 +678,23 @@ class MatrixInfoExtractorManager(object):
     def __init__(self, prop_filename):
         self.prop_filename = prop_filename
 
+    def merge_img_files_in_dir(self, manufacturer, tds):
+
+            file_status = ''
+            matrix_merge_tabimg = MatrixTextExtractor(self.prop_filename)
+            
+            #temp_imgtotext_filename =  matrix_extract_text.temp_imgtotext_dir + matrix_extract_text.filename.strip(".pdf") + "_preprocessed.txt"
+            ''' Pre-processing by Opencv. Use of PyTessaract to extract text and save in database'''
+            temp_imgtotext_filename = matrix_merge_tabimg.pdf_to_text(manufacturer, tds)
+            print("CV temp_imgtotext_filename: ", temp_imgtotext_filename)
+            temp_imgtotext_filename = Path(temp_imgtotext_filename)
+
+            if temp_imgtotext_filename.is_file() and temp_imgtotext_filename.stat().st_size > 0:
+                file_status = "Data is extracted from the technical datasheet of "+ tds + " and stored in \"util / data / extractedinfo / textualdata\" folder"
+            print("CV file_status: ", file_status)
+            return file_status
+    
+
     def extract_and_save_text(self, manufacturer, tds):
 
             file_status = ''
@@ -689,13 +752,19 @@ class MatrixInfoExtractorManager(object):
         inferred_img_status = matrix_extract_text.infer_table_on_tds(self.prop_filename, manufacturer, tds)           
         return inferred_img_status
     
-    '''--------------------Extract Tabular Data in CSV format from Table images--------------------'''
+    '''--------------------Extract Tabular Data in CSV format from Table images and Store all table images in a folder--------------------'''
 
     def extract_table_in_csv(self, manufacturer, tds):
         matrix_extract_text = MatrixTextExtractor(self.prop_filename)
         get_tab_img_set = matrix_extract_text.get_table_imglist(manufacturer, tds)
         return get_tab_img_set
         
+    def store_all_table_img(self, manufacturer, tds):
+        matrix_extract_text = MatrixTextExtractor(self.prop_filename)
+        table_img_set = matrix_extract_text.merge_table_img(manufacturer, tds)
+        return table_img_set
+
+
     '''--------------------Transfer CSV data to MongoDB--------------------'''
 
     def transfer_csv_data(self, manufacturer, tds):

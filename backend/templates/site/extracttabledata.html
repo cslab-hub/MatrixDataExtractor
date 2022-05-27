@@ -12,15 +12,15 @@
         top: 1em;
         left: 30em;
         padding: 1em 1em;
-        height: 30em;
+        height: 40em;
         width: 78em;
     }
     .tab-data-extract{
         position: absolute;
         background-color: #98c222;
-        top: 33em;
+        top: 43em;
         left: 30em;
-        height: 15em;
+        height: 20em;
         width: 78em;
         padding: 1em 1em;
     }
@@ -104,6 +104,15 @@
                     <b>Note : </b> Proper table structure (in proper row and column format) is not maintained to store table data into text files.
 
                 </li>
+                <br>
+                <li>
+                    If you click on <b>Keep All Images Together</b> button, all table images of selected Technical Datasheet are stored in
+                    <b>util -> data -> tabledet -> inference -> storetableimg</b> folder.
+                    <br>
+                    <b>Note : </b> You can delete unwanted table images from <b>util -> data -> tabledet -> inference -> infertableimg</b> folder and then click 
+                    on <b>Keep All Images Together</b> button to keep relevant table images for further processing  at 
+                    <b>util -> data -> tabledet -> inference -> storetableimg</b> folder.
+                </li>
 
            </ul>
         </p>
@@ -124,7 +133,9 @@
                         <option value="" selected="selected">Please select Manufacturer first</option>
                 </select>
                 <button type="submit" class="btn btn-primary" name="gettableimage" value="gettableimage" onload = "getTableImgList()">Extract Table Info</button>
-                <br>
+                <br><br>
+                <button type="submit" class="btn btn-primary" name="mergetabimg" value="mergetabimg">Keep All Images Together</button>
+                <br><br>
                 <div class="table_img_list">
                     <p >
                          <!-- https://jinja.palletsprojects.com/en/3.0.x/templates/-->

@@ -175,6 +175,7 @@ def text_extraction(request):
             matrix_ie_manager = MatrixInfoExtractorManager(prop_filename)      
             file_status = matrix_ie_manager.extract_and_save_text(manufacturer, tds)
             print("file_status: ", file_status)
+
       return render(request, "site/textextraction.html", {"tds_new_dict": tds_new_dict, "file_status": file_status})
  
          
@@ -204,8 +205,8 @@ def transfer_table_data(request):
 '''--------------------Tabular Data Extraction--------------------'''
 
 def extract_table_data(request):
-   tds_new_dict = get_table_img_info()  
-   print("tds_new_dict: ", tds_new_dict)
+   tds_new_dict = get_table_img_info() 
+   
    if request.method == 'GET':  
       return render(request, 'site/extracttabledata.html', {"tds_new_dict": tds_new_dict})
 
@@ -223,6 +224,15 @@ def extract_table_data(request):
             matrix_ie_manager = MatrixInfoExtractorManager(prop_filename)      
             table_img_set = matrix_ie_manager.extract_table_in_csv(manufacturer, tds) 
 
+      elif request.POST.get('mergetabimg',''):
+         form = DataExtractForm(request.POST or None)
+         if form.is_valid():
+            manufacturer = form.cleaned_data["manufacturer"]
+            tds = form.cleaned_data["tdslist"]
+            prop_filename = os.path.join( settings.BASE_DIR,'util/prop/MDE.xml')
+            matrix_ie_manager = MatrixInfoExtractorManager(prop_filename)      
+            table_img_set = matrix_ie_manager.store_all_table_img(manufacturer, tds)
+            
       return render(request, "site/extracttabledata.html",{"tds_new_dict": tds_new_dict, "table_img_set": table_img_set})
 
 
