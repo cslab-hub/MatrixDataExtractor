@@ -18,6 +18,12 @@ bash -i pre_process.sh
 ```
 - If you want model inference for table detection on extracted document images, run *infer.sh* script.
 ```
-$ bash -i infer.sh
+bash -i infer.sh
 ```
-
+- Bounding box (BBox) information during model inference is stored in */util/prop/bbox_info.csv* file.
+# Execute Streamlit Application
+- If you want to execute streamlit application to extract table structure in an interactive mode, run below command
+```
+streamlit run src/app.py
+```
+**Disclaimer:** Other detailed information is mentioned in Di-Plast Wiki page, which is accessable only by project partners.

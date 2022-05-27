@@ -12,3 +12,4 @@ Copy table detection model weight from */tabledetection/diplastmodel/model_final
 
 # How to run web application
 The execution process is mentioned on parent README file.
+**Disclaimer:** Other detailed information is mentioned in Di-Plast Wiki page, which is accessable only by project partners.
