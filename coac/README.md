@@ -6,26 +6,23 @@ The installation process is mentioned on parent README file to create *env_mde* 
 
 # Pre-requisite
 
-- Remove sample.txt files from different directories (e.g. from *data, /util/data/inferimgdir, /util/data/srcpdf, /util/data/tempimgdir* directories).
-- Add annotated dataset in *data* folder (e.g. */data/annotations, /data/train, /data/val, /data/test* directories).
-- Add your model weight (e.g. *model_final.pth*) in *diplastmodel* directory.
+- Remove sample.txt files from different directories (e.g. from *coac/data, coac/util/data/inferimgdir, coac/util/data/srcpdf, coac/util/data/tempimgdir, coac/util/data/inferredpdfdir* directories).
+- Add annotated dataset in *coac/data* folder (e.g. *coac/data/annotations, coac/data/train, coac/data/val, coac/data/test* directories).
+- Add your model weight (e.g. *model_final.pth*) in *coac/diplastmodel* directory.
 - Adapt variable values in code according to directory paths.
 
 # Execution
-- If you want to create document images from PDF documents, run *pre_process.sh* script.
+- If you want to create document images from PDF documents, run *pre_process.sh* script. If you want to process single document (not all PDF documents), replace the value of *tdsname* variable before processing.
 ```
 bash -i pre_process.sh
 ```
-- If you want model inference for table detection on extracted document images, run *infer.sh* script.
+- If you want model inference for table detection on extracted document images, run *infer.sh* script. If you want to infer single document (not all PDF documents), replace the value of *tdsname* variable with PDF name before infering. If the folder of *tdsname* value available at *coac/util/data/tempimgdir*, then you will get inferred result at *coac/util/data/inferimgdir* directory.
 ```
 bash -i infer.sh
 ```
-- Bounding box (BBox) information during model inference is stored in */util/prop/bbox_info.csv* file. The data in this csv file is stored into below format
-*Filename_PageNo, TABLE_NO, X_MIN, Y_MIN, X_MAX, Y_MAX*, where *PageNo* and *TABLE_NO* is started with index zero, not one.
+- Bounding box (BBox) information during model inference is stored in *coac/util/bbox* directory in csv files. The data of each csv file is stored into below format
+*Filename_PageNo, TABLE_NO, X_MIN, Y_MIN, X_MAX, Y_MAX*, where *PageNo* and *TABLE_NO* is started with index zero, e.g., Filename_0 for first page.
 
-# Execute Streamlit Application
-- If you want to execute streamlit application to extract table structure in an interactive mode, run below command
-```
-streamlit run src/app.py
-```
-**Disclaimer:** Other detailed information is mentioned in Di-Plast Wiki page, which is accessable only by project partners.
+- You can save PDF document with inferred table region at *coac/util/data/inferredpdfdir* before further processing with some tool such as Camelot.
+
+**Disclaimer:** Other detailed information is mentioned in Di-Plast project Wiki page, which is accessable only by project partners.

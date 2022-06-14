@@ -86,14 +86,15 @@ def register_dataset(df, dataset_label, image_dir):
     MetadataCatalog.get(dataset_label).set(thing_classes=["Table"])
     return MetadataCatalog.get(dataset_label), dataset_label
 
-
+'''
 def crop_save_img(infer_tableimg_dir, img, table_img_filename, table_no, x_min, y_min, x_max, y_max):
     Path(infer_tableimg_dir).mkdir(parents=True, exist_ok=True)
     table_img = infer_tableimg_dir + "/" + str(table_img_filename) + "_" + str(table_no) + ".jpg"
     imgCrop = img[y_min: y_max, x_min:x_max]
     cv2.imwrite(table_img, imgCrop)
+'''
 
-def main():
+def get_predictor():
 
     print(torch.__version__, " , ", torch.cuda.is_available())
 
@@ -132,11 +133,13 @@ def main():
     
                             
     #Inference
-    print("Inference started !", flush=True)
+    #print("Inference started !", flush=True)
 
     mde_test_metadata = MetadataCatalog.get("test_coco")
     predictor = DefaultPredictor(cfg)
+    return predictor, mde_test_metadata
 
+def infer_table_from_all_doc(predictor, mde_test_metadata):
     prop_filename = 'util/prop/coac_prop.xml'
     root = ET.parse(prop_filename).getroot()
     for child_element in root.findall('dataset/tabledetection'):
@@ -144,60 +147,144 @@ def main():
         infer_dir = os.getcwd() + child_element.find('inferimgdir').text
         infer_tableimg_dir = os.getcwd() + child_element.find('infertableimgdir').text
 
-    for filename in os.listdir(temp_imgdir):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
-            img_path = os.path.join(temp_imgdir,filename)
-            print("img_path: ", img_path)
-            if os.path.isfile(img_path):
-                img = cv2.imread(img_path)
-                outputs = predictor(img)
-                print(outputs["instances"].pred_classes)
-                print(outputs["instances"].pred_boxes)
-                #v = Visualizer(img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TEST[0]))
-                v = Visualizer(img[:, :, ::-1], metadata=mde_test_metadata, scale=1) # Keep scale=1 for saving predicted images
-                v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-                output_path = infer_dir + '/' + filename
-                cv2.imwrite(output_path, v.get_image()[:, :, ::-1])
+    for tdsname in os.listdir(temp_imgdir):
+        tdsdir = os.path.join(temp_imgdir,tdsname)
+        infer_tdsdir = os.path.join(infer_dir,tdsname)
+        Path(infer_tdsdir).mkdir(parents=True, exist_ok=True)
 
-                table_img_filename = os.path.splitext(os.path.basename(filename))[0]
+        for filename in os.listdir(tdsdir):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
+                img_path = os.path.join(tdsdir,filename)
 
-                '''------ Extract Only Table section ------'''
-                '''----------Extract Bounding Box----------'''
-                bboxes = outputs["instances"].pred_boxes.tensor.cpu().numpy()
+                if os.path.isfile(img_path):
+                    img = cv2.imread(img_path)
+                    outputs = predictor(img)
+                    print(outputs["instances"].pred_classes)
+                    print(outputs["instances"].pred_boxes)
+                    #v = Visualizer(img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TEST[0]))
+                    v = Visualizer(img[:, :, ::-1], metadata=mde_test_metadata, scale=1) # Keep scale=1 for saving predicted images
+                    v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+                    output_path = infer_tdsdir + "/" + filename
+                    inferred_img = v.get_image()[:, :, ::-1]
+                    cv2.imwrite(output_path, inferred_img)
 
-                for table_no, item in enumerate(bboxes):
-                    if item.size == 4:
-                        x_min = int(item[0]) # First co-ordinates
-                        y_min = int(item[1])
-                        x_max = int(item[2]) # Fourth co-ordinates
-                        y_max = int(item[3])
-                        
-                        #print(idx, " : " , x_min, "," ,y_min, ",", x_max, ",", y_max)
-                        index_name = str(table_img_filename) + "_" + str(table_no)
-                        temp_df = pd.DataFrame({
-                            "Filename": table_img_filename,
-                            "TABLE_NO": table_no,
-                            "X_MIN": x_min,
-                            "Y_MIN": y_min,
-                            "X_MAX": x_max,
-                            "Y_MAX": y_max
-                        }, index=[index_name])
+                    table_img_filename = os.path.splitext(os.path.basename(filename))[0]
 
-                        column_names = ["Filename", "TABLE_NO", "X_MIN", "Y_MIN", "X_MAX", "Y_MAX"]
-                        df = pd.DataFrame(columns=column_names)
-                        df = pd.concat([df, temp_df])
-                        # Save BBox information in CSV file
-                        csv_filename = 'util/prop/bbox_info.csv'
-                        df.to_csv(csv_filename,header=False,sep='\t',mode='a',index=False, encoding='utf-8', na_rep='Unkown')
-                        crop_save_img(infer_tableimg_dir, img, table_img_filename, table_no, x_min, y_min, x_max, y_max)
+                    '''------ Extract Only Table section ------'''
+                    '''----------Extract Bounding Box----------'''
+                    bboxes = outputs["instances"].pred_boxes.tensor.cpu().numpy()
 
-                
-            else:
-                print("Images not found !")
-    
-    print("Inference completed !", flush=True)
-    
+                    for table_no, item in enumerate(bboxes):
+                        if item.size == 4:
+                            x_min = int(item[0]) # First co-ordinates
+                            y_min = int(item[1])
+                            x_max = int(item[2]) # Fourth co-ordinates
+                            y_max = int(item[3])
                             
+                            #print(idx, " : " , x_min, "," ,y_min, ",", x_max, ",", y_max)
+                            index_name = str(table_img_filename) + "_" + str(table_no)
+                            temp_df = pd.DataFrame({
+                                "Filename": table_img_filename,
+                                "TABLE_NO": table_no,
+                                "X_MIN": x_min,
+                                "Y_MIN": y_min,
+                                "X_MAX": x_max,
+                                "Y_MAX": y_max
+                            }, index=[index_name])
+
+                            column_names = ["Filename", "TABLE_NO", "X_MIN", "Y_MIN", "X_MAX", "Y_MAX"]
+                            df = pd.DataFrame(columns=column_names)
+                            df = pd.concat([df, temp_df])
+                            # Save BBox information in CSV file
+                            csv_filename = 'util/bbox/' + tdsname + '.csv'
+                            df.to_csv(csv_filename,header=False,sep='\t',mode='a',index=False, encoding='utf-8', na_rep='Unkown')
+                            #crop_save_img(infer_tableimg_dir, img, table_img_filename, table_no, x_min, y_min, x_max, y_max)
+
+                    
+                else:
+                    print("Images not found !")
+    
+    #print("Inference completed !", flush=True)
+    
+def infer_table_from_single_doc(predictor,mde_test_metadata, tdsname):
+    prop_filename = 'util/prop/coac_prop.xml'
+    root = ET.parse(prop_filename).getroot()
+    for child_element in root.findall('dataset/tabledetection'):
+        temp_imgdir = os.getcwd()  + child_element.find('tempimgdir').text
+        infer_dir = os.getcwd() + child_element.find('inferimgdir').text
+        #infer_tableimg_dir = os.getcwd() + child_element.find('infertableimgdir').text
+
+    tdsdir = os.path.join(temp_imgdir,tdsname)
+    infer_tdsdir = os.path.join(infer_dir,tdsname)
+
+    if os.path.isdir(tdsdir):
+        Path(infer_tdsdir).mkdir(parents=True, exist_ok=True)
+        for filename in os.listdir(tdsdir):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
+                img_path = os.path.join(tdsdir,filename)
+
+                if os.path.isfile(img_path):
+                    img = cv2.imread(img_path)
+                    outputs = predictor(img)
+                    print(outputs["instances"].pred_classes)
+                    print(outputs["instances"].pred_boxes)
+                    #v = Visualizer(img[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TEST[0]))
+                    v = Visualizer(img[:, :, ::-1], metadata=mde_test_metadata, scale=1) # Keep scale=1 for saving predicted images
+                    v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+                    output_path = infer_tdsdir + "/" + filename
+                    inferred_img = v.get_image()[:, :, ::-1]
+                    cv2.imwrite(output_path, inferred_img)
+
+                    table_img_filename = os.path.splitext(os.path.basename(filename))[0]
+
+                    '''------ Extract Only Table section ------'''
+                    '''----------Extract Bounding Box----------'''
+                    bboxes = outputs["instances"].pred_boxes.tensor.cpu().numpy()
+
+                    for table_no, item in enumerate(bboxes):
+                        if item.size == 4:
+                            x_min = int(item[0]) # First co-ordinates
+                            y_min = int(item[1])
+                            x_max = int(item[2]) # Fourth co-ordinates
+                            y_max = int(item[3])
+                        
+                            #print(idx, " : " , x_min, "," ,y_min, ",", x_max, ",", y_max)
+                            index_name = str(table_img_filename) + "_" + str(table_no)
+                            temp_df = pd.DataFrame({
+                                "Filename": table_img_filename,
+                                "TABLE_NO": table_no,
+                                "X_MIN": x_min,
+                                "Y_MIN": y_min,
+                                "X_MAX": x_max,
+                                "Y_MAX": y_max
+                            }, index=[index_name])
+
+                            column_names = ["Filename", "TABLE_NO", "X_MIN", "Y_MIN", "X_MAX", "Y_MAX"]
+                            df = pd.DataFrame(columns=column_names)
+                            df = pd.concat([df, temp_df])
+                            # Save BBox information in CSV file
+                            csv_filename = 'util/bbox/' + tdsname + '.csv'
+                            df.to_csv(csv_filename,header=False,sep='\t',mode='w',index=False, encoding='utf-8', na_rep='Unkown')
+                            #crop_save_img(infer_tableimg_dir, img, table_img_filename, table_no, x_min, y_min, x_max, y_max)
+
+                        
+                else:
+                    print("Images not found !")
+
+    else:
+        print("Directory does not exist. Please check your directory name.")   
+
+    #print("Inference completed !", flush=True)
+
+
+def main():
+    predictor, mde_test_metadata = get_predictor()
+    ''' Infer all PDF document images '''
+    #infer_table_from_all_doc(predictor,mde_test_metadata)
+    ''' Infers only single PDF document image '''
+    tdsname = 'Your folder name from coac/util/data/tempimgdir directory'
+    infer_table_from_single_doc(predictor,mde_test_metadata, tdsname)
+
 if __name__ == "__main__":
     print("Program starts !", flush=True)
     main()
