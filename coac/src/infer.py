@@ -264,7 +264,7 @@ def infer_table_from_single_doc(predictor,mde_test_metadata, tdsname):
                             df = pd.concat([df, temp_df])
                             # Save BBox information in CSV file
                             csv_filename = 'util/bbox/' + tdsname + '.csv'
-                            df.to_csv(csv_filename,header=False,sep='\t',mode='w',index=False, encoding='utf-8', na_rep='Unkown')
+                            df.to_csv(csv_filename,header=False,sep='\t',mode='a',index=False, encoding='utf-8', na_rep='Unkown')
                             #crop_save_img(infer_tableimg_dir, img, table_img_filename, table_no, x_min, y_min, x_max, y_max)
 
                         
