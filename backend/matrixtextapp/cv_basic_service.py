@@ -18,6 +18,7 @@ import cv2
 import numpy as np
 import imutils, csv, json, random
 from pymongo import MongoClient
+import camelot
 
 '''--------------------PyTorch Library --------------------'''
 import torch
@@ -224,7 +225,7 @@ class MatrixTextExtractor(object):
 
         if(temp_img_dir.exists()):
             temp_imgfile_dir.mkdir(parents=True, exist_ok=True)
-            pages = convert_from_path(search_file, dpi=500)
+            pages = convert_from_path(search_file, dpi=72)
             pg_no = 0
             for page in pages:
                 page.save( temp_imgfile_dirpath + "/" + str(pg_no)+ '.jpg', 'JPEG')
@@ -352,7 +353,8 @@ class MatrixTextExtractor(object):
     Input: property filename and plastic product name retrieved from plastic product technical data sheet.
     Output: Return None. Infer tables and stores in inferimg directory.
     '''
-    def infer_table_on_tds(self, prop_filename, manufacturer, tds):
+    def infer_table_on_tds(self, prop_filename, manufacturer, tds, scale=1, img_width=612, img_height=792):
+        '''--- DPI Value in initialize to 72. Change DPI according to your requirements and adapt necessary code changes ---'''
         tds = str(tds).strip('\'')
         ''' Check Parent image_dir (util/data/tempimg/tabledata) and create subdir(Manufacturer Names) if not exists '''
         Path(self.parent_temptableimg_dirname).mkdir(parents=True, exist_ok=True)
@@ -382,7 +384,7 @@ class MatrixTextExtractor(object):
 
         if(temp_img_dir.exists()):
             temp_imgfile_dir.mkdir(parents=True, exist_ok=True)
-            pages = convert_from_path(search_file, dpi=500)
+            pages = convert_from_path(search_file, dpi=72)
             pg_no = 0
             for page in pages:
                 page.save( temp_imgfile_dirpath + "/" + str(pg_no)+ '.jpg', 'JPEG')
@@ -418,6 +420,43 @@ class MatrixTextExtractor(object):
 
         '''----------Write to CSV file----------'''
         df.to_csv(csv_filename, sep='\t', encoding='utf-8')
+
+        '''----------Map image pixels to PDF co-ordinates----------'''
+        df_table_list = pd.read_csv(csv_filename, sep='\t', index_col=None, encoding='utf-8')
+        count_row = df_table_list.shape[0]  # Gives number of rows
+        count_col = df_table_list.shape[1]  # Gives number of columns
+        ''' Filter dataframe'''
+        df_table_info_list = df_table_list[df_columns]
+        #print(df_table_info_list)
+        df_row = 0
+        for df_row in range(count_row):
+            pdf_pg_no = int (df_table_info_list.iloc[df_row]["IMG_NO"])
+            table_no = int (df_table_info_list.iloc[df_row]["TABLE_NO"])
+            table_x_min = df_table_info_list.iloc[df_row]["X_MIN"]
+            table_x_max = df_table_info_list.iloc[df_row]["X_MAX"]
+            table_y_min = df_table_info_list.iloc[df_row]["Y_MIN"]
+            table_y_max = df_table_info_list.iloc[df_row]["Y_MAX"]
+            #print("INFO-1: ", pdf_pg_no, table_x_min, table_x_max, table_y_min, table_y_max)
+            '''
+            Important Note: The PDF page size by default refers to US Letter, Portrait (216 x 279 mm) or (8.5 x 11 inches). It fits to our calculation.
+            If you have different PDF page size width and height, then change code for scale, pdf_table_x_min, pdf_table_x_max, pdf_table_y_min, pdf_table_y_max.
+            Detailed information is available on Wiki.
+            '''
+            pdf_table_x_min = table_x_min/scale
+            pdf_table_x_max = table_x_max/scale
+
+            pdf_table_y_min = int(img_height-table_y_min)/scale
+            pdf_table_y_max = int(img_height-table_y_max)/scale
+
+            table_excel_name = self.infertableimg+ "/" + manufacturer + "/" + str(tds).rstrip(".pdf") + "/" + str(pdf_pg_no) +"_" + str(table_no) + ".xlsx"
+            #print("Info-2: ", pdf_table_x_min , pdf_table_y_min , pdf_table_x_max , pdf_table_y_max)
+            pdf_table_coordinate = str(int(pdf_table_x_min)) +","+ str(int(pdf_table_y_min))+ ","+ str(int(pdf_table_x_max))+ ","+ str(int(pdf_table_y_max))
+            #print("pdf_table_coordinate: ", pdf_table_coordinate)
+            pdf_table = camelot.read_pdf(search_filepath, pages= str(1+pdf_pg_no), flavor='stream',  table_areas=[pdf_table_coordinate])
+            df_table = pdf_table[0].df
+            print(df_table)
+            '''---Save dataframe to excel file---'''
+            df_table.to_excel(table_excel_name)
 
         infer_status = "Table detected from your selected document(s) saved to \"util / data / tabledet / inference \". \
                         Please check \"inferimg\" and \"infertableimg\" folder for more details"
