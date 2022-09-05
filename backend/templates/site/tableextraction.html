@@ -1,6 +1,6 @@
 {% extends "site/index.html" %}
 
-{% block title %}Table Region Detection and Extraction{% endblock %}
+{% block title %}Tabular Data Extraction{% endblock %}
 
 {% block head %}
     {{ block.super }}
@@ -12,15 +12,15 @@
         top: 1em;
         left: 30em;
         padding: 1em 1em;
-        height: 49em;
+        height: 43em;
         width: 78em;
     }
     .tab-reg-detection{
         position: absolute;
         background-color: #98c222;
-        top: 52em;
+        top: 45em;
         left: 30em;
-        height: 15em;
+        height: 10em;
         width: 78em;
         padding: 1em 1em;
     }
@@ -73,7 +73,7 @@
 <div class="tab-reg-extract-structure"></div>  
     <div class="tab-reg-extract-info">
         <h3>
-            How Table Region Identification Works
+            How Tabular Data Extraction Works
         </h3>
         <br>
         <p style="font-size:1.2em">
@@ -83,7 +83,7 @@
                </li>
                <br>
                <li>
-                    Click on <b>Extract Table Image</b> button.
+                    Click on <b>Extract Tabular Data</b> button.
                </li>
                <br>
                <li>
@@ -93,7 +93,7 @@
                <li>
                     <b>inferimg : </b> It contains Manufacturer sub-folders. Within each Manufacturer sub-folders, there are Technical Datasheet sub-folders, e.g.,
                     <b>LyondellBasell</b> sub-folder contains another sub-folders with Technical Datasheet names, e.g., <b>Circulen 2420D Plus and Lucalen A2700P</b> 
-                    sub-folders. If you access one of them, you can see each PDF page of the technical datasheet in image format. 
+                    sub-folders. If you access one of them, you can see each PDF page of each technical datasheet in image format. 
                </li>
                <br>
                <li>
@@ -103,11 +103,7 @@
                <br>
                <li>
                    <b>For Advanced User : </b> A CSV file is also created in this sub-folder (e.g. <b> Circulen 2420D Plus</b>) which stores co-ordinates of 
-                   pixel values of those rectangular boundary boxes.
-               </li>
-               <br>
-               <li>
-                   <b>For Advanced User : </b> There are 3 types error appeared in Document Table Detection methods- Partial-detection, Un-detection and Mis-detection.
+                   pixel values of those rectangular boundary boxes.There are 3 types error appeared in Document Table Detection methods- Partial-detection, Un-detection and Mis-detection.
                    If such scenario occurs, then delete corresponding wrong co-ordinate values from CSV file. These co-ordinate values stored in CSV file are 
                    considered for further table data extraction operations. 
                </li>
@@ -115,15 +111,12 @@
                <li>
                 <b>infertableimg : </b> It contains Manufacturer sub-folders. Within each Manufacturer sub-folders, there are Technical Datasheet sub-folders, e.g.,
                 <b>LyondellBasell</b> sub-folder contains another sub-folders with Technical Datasheet names, e.g., <b>Circulen 2420D Plus and Lucalen A2700P</b> 
-                sub-folders. If you access one of them, you can see document table images in each Technical Datasheet sub-folder. These tables are extracted from
+                sub-folders. If you access one of them, you can see document table images and corresponding tabular data in excel format in each Technical Datasheet sub-folder. These tables are extracted from
                 the images stored within <b> inferimg </b> folder. If a wrong table image is extracted due to above mentioned 3 erros, delete that image 
-                immediately. Optical Character Recognition (<b>OCR</b>) based techniques will be used to extract table data from those table images.
+                immediately. A mapping from document image to PDF page is performed based on Dot Per Inch (DPI) = 72 to extract table data from those table images. For more information, please visit <a href="https://www.pdfscripting.com/public/PDF-Page-Coordinates.cfm" target="_blank">PDF Coordinate Systems.</a>
+                Please feel free to change the code for different DPI values.
                </li>
                <br>
-               <li>
-                   If any document table is missed to idenfy by Deep Learning algorithms on your dataset, please crop the table images and placed in the 
-                   corresponding sub-folders within <b>infertableimg</b> folder.
-               </li>
 
             </ul>
           
@@ -145,7 +138,7 @@
                     <select name="tdslist" id="tdslist" style="margin-left:1em; margin-right:1em">
                         <option value="" selected="selected">Please select Manufacturer first</option>
                     </select>
-                <button type="submit" class="btn btn-primary" name="extracttable" value="extracttable">Extract Table Image</button>
+                <button type="submit" class="btn btn-primary" name="extracttable" value="extracttable">Extract Tabular Data</button>
                 <br> <br>
                 <div class="tab-extract-status">
                     <p >{{table_extract_status}}</p>
