@@ -36,5 +36,5 @@ $ python src/export_model.py --config-file diplastmodel/faster_rcnn_R_101_FPN_3x
 ## Transfer Learning based Document Table Detection
 For more transfer learning based document table detection research work, please check below research paper-
 
-Chowdhury, Arnab Ghosh, Nils Schut, and Martin Atzmüller. "A Hybrid Information Extraction Approach using Transfer Learning on Richly-Structured Documents." LWDA. 2021 (http://ceur-ws.org/Vol-2993/paper-02.pdf).
+Chowdhury, Arnab Ghosh, Nils Schut, and Martin Atzmüller. "A Hybrid Information Extraction Approach using Transfer Learning on Richly-Structured Documents." LWDA, 2021(http://ceur-ws.org/Vol-2993/paper-02.pdf).
 
