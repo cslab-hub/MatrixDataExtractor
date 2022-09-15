@@ -282,7 +282,7 @@ def main():
     ''' Infer all PDF document images '''
     #infer_table_from_all_doc(predictor,mde_test_metadata)
     ''' Infers only single PDF document image '''
-    tdsname = 'Your folder name from coac/util/data/tempimgdir directory'
+    tdsname = 'Your folder name from coac/util/data/tempimgdir directory' # 'Petrothene NA940000'
     infer_table_from_single_doc(predictor,mde_test_metadata, tdsname)
 
 if __name__ == "__main__":

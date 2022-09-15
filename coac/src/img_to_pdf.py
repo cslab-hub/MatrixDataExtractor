@@ -126,7 +126,6 @@ if __name__ == "__main__":
     ''' Pre-process all PDF documents in srcpdf folder '''
     #mtdep.all_pdf_to_img()
     ''' Pre-process only single PDF document in srcpdf folder '''
-    #tdsname = 'Your folder name from coac/util/data/srcpdf/Filename.pdf'
-    tdsname = 'Petrothene NA940000.pdf'
+    tdsname = 'Only Your Filename.pdf in String format, which is taken from coac/util/data/srcpdf/Filename.pdf' #'Petrothene NA940000.pdf'
     mtdep.extract_tabulardata_from_pdf(tdsname)
     print("Program ends !", flush=True)
