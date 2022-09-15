@@ -6,7 +6,8 @@
             <tempimgdir>/util/data/tempimgdir</tempimgdir>
             <inferimgdir>/util/data/inferimgdir</inferimgdir>
             <infertableimgdir>/util/data/infertableimgdir</infertableimgdir>
-            <imgtopdfdir>/util/data/imgtopdfdir</imgtopdfdir>
+            <tabulardata>/util/data/tabulardata</tabulardata>
+            <bboxinfo>/util/bbox</bboxinfo>
         </tabledetection>
         <tableinference category='table inference'>
             <inferpdf></inferpdf>
