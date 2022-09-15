@@ -23,6 +23,9 @@ bash -i infer.sh
 - Bounding box (BBox) information during model inference is stored in *coac/util/bbox* directory in csv files. The data of each csv file is stored into below format
 *Filename_PageNo, TABLE_NO, X_MIN, Y_MIN, X_MAX, Y_MAX*, where *PageNo* and *TABLE_NO* is started with index zero, e.g., Filename_0 for first page.
 
-- You can save PDF document with inferred table region at *coac/util/data/inferredpdfdir* before further processing with some tool such as Camelot.
+- Run *img_to_pdf.sh* to save tabular data at *coac/util/data/tabulardata* with help of Camelot tool.
+```
+bash -i img_to_pdf.sh
+```
 
 **Disclaimer:** Other detailed information is mentioned in Di-Plast project Wiki page, which is accessable only by project partners.
