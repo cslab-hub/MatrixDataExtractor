@@ -20,3 +20,4 @@ elasticsearch-dsl
 python-dotenv
 streamlit
 camelot-py
+pdfplumber
